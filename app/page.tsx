@@ -1,9 +1,9 @@
-import { NavBar } from "@/components/portfolio/NavBar"
-import { PortfolioHeader } from "@/components/portfolio/PortfolioHeader"
-import { VisionSection } from "@/components/portfolio/VisionSection"
-import { PrinciplesSection } from "@/components/portfolio/PrinciplesSection"
-import { ExecutionSection } from "@/components/portfolio/ExecutionSection"
-import { PortfolioFooter } from "@/components/portfolio/PortfolioFooter"
+import  NavBar  from "@/components/portfolio/NavBar"
+import  PortfolioHeader  from "@/components/portfolio/PortfolioHeader"
+import  VisionSection  from "@/components/portfolio/VisionSection"
+import  PrinciplesSection  from "@/components/portfolio/PrinciplesSection"
+import  ExecutionSection  from "@/components/portfolio/ExecutionSection"
+import  PortfolioFooter  from "@/components/portfolio/PortfolioFooter"
 
 export default function PortfolioPage() {
   return (
