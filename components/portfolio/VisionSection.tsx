@@ -3,82 +3,90 @@ export function VisionSection() {
     <section
       id="vision"
       aria-labelledby="vision-heading"
-      className="border-b border-[var(--border)] max-w-6xl mx-auto px-6 py-16 md:py-24"
+      className="border-b border-border max-w-6xl mx-auto px-6 py-16 md:py-28"
     >
-      {/* Section label */}
-      <div className="flex items-center gap-3 mb-10">
-        <span className="font-mono text-xs text-[var(--accent)] tracking-widest uppercase">
+      {/* Rótulo da Seção */}
+      <div className="flex items-center gap-3 mb-12">
+        <span className="font-mono text-[10px] sm:text-xs text-accent tracking-[0.2em] uppercase">
           01 / Visão
         </span>
-        <div className="flex-1 h-px bg-[var(--border)]" />
+        <div className="flex-1 h-px bg-border/60" />
       </div>
 
-      {/* Layout Visual Suggestion:
-          Bloco de texto em largura máxima ~720px, centralizado à esquerda,
-          com linha de acento vertical (border-left azul) e tipografia grande.
-          No lado direito (md+), um pequeno painel de diagnóstico estilo terminal
-          exibindo os pontos de dor como bullet list em fonte mono. */}
-
-      <div className="grid md:grid-cols-[1fr_auto] gap-12 items-start">
-        {/* Main statement */}
+      <div className="grid lg:grid-cols-[1fr_320px] gap-16 items-start">
+        {/* Declaração Principal */}
         <div className="max-w-2xl">
           <h2
             id="vision-heading"
-            className="text-2xl md:text-3xl font-sans font-medium text-[var(--foreground)] text-pretty leading-relaxed"
+            className="text-3xl md:text-4xl font-semibold text-foreground tracking-tight leading-[1.15]"
           >
-            O problema que o sistema resolve
+            Engenharia focada no <br className="hidden md:block" />
+            <span className="text-accent">comportamento do sistema</span> sob carga.
           </h2>
-          <div className="mt-6 pl-5 border-l-2 border-[var(--accent)] space-y-4">
-            <p className="text-[var(--muted-foreground)] text-base leading-relaxed font-sans">
+          
+          <div className="mt-10 pl-6 border-l-2 border-accent/40 space-y-6">
+            <p className="text-muted-foreground text-base md:text-lg leading-relaxed">
               Sistemas distribuídos falham de maneiras previsíveis: contenção de locks em camadas de I/O
-              síncrono, propagação descontrolada de falhas por ausência de circuit-breaking, e gargalos
-              de throughput causados por acoplamento rígido entre produtores e consumidores de mensagens.
+              síncrono, propagação descontrolada de falhas por ausência de circuit-breaking e gargalos
+              causados por acoplamento rígido.
             </p>
-            <p className="text-[var(--muted-foreground)] text-base leading-relaxed font-sans">
-              O foco é projetar e refatorar essas superfícies de falha — convertendo sistemas com latência
-              p99 degradada e disponibilidade inconsistente em arquiteturas observáveis, resilientes e
-              horizontalmente escaláveis, sem sacrificar a corretude dos dados em trade-offs de consistência.
+            <p className="text-muted-foreground text-base md:text-lg leading-relaxed">
+              O foco é projetar e refatorar essas superfícies de falha — convertendo latência p99 degradada 
+              em arquiteturas observáveis e horizontalmente escaláveis, sem sacrificar a corretude dos dados.
             </p>
-            <p className="text-[var(--muted-foreground)] text-base leading-relaxed font-sans">
-              Cada decisão arquitetural é justificada por restrições mensuráveis de SLO, não por preferência
-              tecnológica — nenhum componente é adicionado ao sistema sem que seu modo de falha e
-              seu impacto no erro de estado global sejam explicitamente modelados.
+            <p className="text-foreground/80 text-sm md:text-base leading-relaxed font-medium italic">
+              "Cada decisão é justificada por restrições mensuráveis de SLO, não por preferência tecnológica."
             </p>
           </div>
         </div>
 
-        {/* Terminal diagnostics panel */}
+        {/* Terminal de Diagnóstico */}
         <aside
           aria-label="Diagnóstico técnico"
-          className="w-full md:w-72 shrink-0 border border-[var(--border)] rounded-lg overflow-hidden"
+          className="w-full shrink-0 border border-border rounded-xl overflow-hidden shadow-2xl shadow-accent/5 bg-card"
         >
-          <div className="bg-[var(--secondary)] px-4 py-2 flex items-center gap-2 border-b border-[var(--border)]">
-            <span className="w-2.5 h-2.5 rounded-full bg-[oklch(0.65_0.22_25)]" />
-            <span className="w-2.5 h-2.5 rounded-full bg-[oklch(0.75_0.20_85)]" />
-            <span className="w-2.5 h-2.5 rounded-full bg-[oklch(0.65_0.19_145)]" />
-            <span className="ml-2 font-mono text-xs text-[var(--muted-foreground)]">
-              pain_points.sh
+          {/* Header do Terminal */}
+          <div className="bg-secondary/50 px-4 py-3 flex items-center justify-between border-b border-border">
+            <div className="flex gap-1.5">
+              <div className="w-2.5 h-2.5 rounded-full bg-destructive/80" />
+              <div className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
+              <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
+            </div>
+            <span className="font-mono text-[10px] text-muted-foreground tracking-tight">
+              diagnose_system.sh
             </span>
           </div>
-          <div className="p-4 font-mono text-xs leading-6 bg-[var(--card)] space-y-1">
-            <p className="text-[var(--muted-foreground)]">
-              <span className="text-[var(--accent)]">$</span> diagnose --system
-            </p>
-            <div className="mt-2 space-y-2 text-[var(--muted-foreground)]">
+
+          {/* Conteúdo do Terminal */}
+          <div className="p-5 font-mono text-[11px] leading-relaxed bg-card/80 backdrop-blur-sm">
+            <div className="flex gap-2 mb-4">
+              <span className="text-accent">❯</span>
+              <span className="text-foreground">run analysis --target=production</span>
+            </div>
+            
+            <div className="space-y-3">
               {[
-                { key: "latency_p99", val: "850ms → 210ms" },
-                { key: "lock_contention", val: "40 workers" },
-                { key: "availability", val: "99.5% → 99.95%" },
-                { key: "throughput_gain", val: "+340%" },
-                { key: "infra_cost", val: "−62%" },
-              ].map(({ key, val }) => (
-                <div key={key} className="flex justify-between gap-4">
-                  <span className="text-[oklch(0.55_0_0)]">{key}</span>
-                  <span className="text-[var(--foreground)]">{val}</span>
+                { label: "LATENCY_P99", value: "850ms → 210ms", color: "text-emerald-500" },
+                { label: "AVAILABILITY", value: "99.5% → 99.95%", color: "text-emerald-500" },
+                { label: "LOCK_CONTENTION", value: "DECREASED_70%", color: "text-accent" },
+                { label: "THROUGHPUT", value: "+340% GAIN", color: "text-emerald-500" },
+                { label: "INFRA_COST", value: "-62% OPTIMIZED", color: "text-amber-500" },
+              ].map((stat) => (
+                <div key={stat.label} className="flex flex-col gap-0.5">
+                  <span className="text-muted-foreground/60 text-[9px] uppercase tracking-tighter">
+                    {stat.label}
+                  </span>
+                  <span className={`font-bold ${stat.color}`}>
+                    {stat.value}
+                  </span>
                 </div>
               ))}
             </div>
-            <p className="mt-3 text-[var(--accent)]">✓ diagnostic complete</p>
+
+            <div className="mt-6 pt-4 border-t border-border/40 flex items-center justify-between">
+              <span className="text-accent animate-pulse">■</span>
+              <span className="text-[9px] text-muted-foreground">STATUS: OPTIMIZED</span>
+            </div>
           </div>
         </aside>
       </div>
