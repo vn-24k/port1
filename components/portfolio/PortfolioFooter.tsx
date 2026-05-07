@@ -29,23 +29,35 @@ const contactItems = [
 
 export function PortfolioFooter() {
   return (
-    <footer className="bg-[var(--card)] border-t border-[var(--border)]">
-      <div className="max-w-6xl mx-auto px-6 py-16">
-        <div className="grid md:grid-cols-2 gap-12 items-start">
-          {/* Left: CTA */}
-          <div className="space-y-4">
-            <h2 className="text-xl font-sans font-semibold text-[var(--foreground)] text-pretty">
-              Vamos falar sobre o seu sistema.
+    <footer className="bg-card/50 border-t border-border mt-12">
+      <div className="max-w-6xl mx-auto px-6 py-16 md:py-24">
+        <div className="grid md:grid-cols-[1fr_auto] gap-16 items-start">
+          
+          {/* Esquerda: Chamada para Ação (CTA) */}
+          <div className="space-y-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-accent/20 bg-accent/5">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
+              </span>
+              <span className="font-mono text-[10px] text-accent uppercase tracking-widest">
+                Disponível para novos projetos
+              </span>
+            </div>
+
+            <h2 className="text-2xl font-semibold text-foreground tracking-tight max-w-md">
+              Vamos falar sobre a performance do seu sistema.
             </h2>
-            <p className="text-sm text-[var(--muted-foreground)] leading-relaxed max-w-sm font-sans">
-              Se o seu stack enfrenta problemas de latência, gargalos de throughput, cascatas de falha
-              ou custo de infra desproporcional ao volume — é exatamente o tipo de problema que
-              esta engenharia resolve.
+            
+            <p className="text-sm text-muted-foreground leading-relaxed max-w-sm">
+              Se sua stack enfrenta gargalos de latência, cascatas de falha 
+              ou custos de infra desproporcionais — eu projeto a solução técnica 
+              para escalar com eficiência.
             </p>
           </div>
 
-          {/* Right: Contact grid */}
-          <div className="grid sm:grid-cols-2 gap-4">
+          {/* Direita: Grid de Contatos */}
+          <div className="grid sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 gap-3 w-full md:w-[450px]">
             {contactItems.map((item) => {
               const Icon = item.icon
               return (
@@ -54,18 +66,20 @@ export function PortfolioFooter() {
                   href={item.href}
                   target={item.href.startsWith("http") ? "_blank" : undefined}
                   rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="flex items-start gap-3 p-4 border border-[var(--border)] rounded-lg bg-[var(--background)] hover:border-[var(--accent-border)] hover:bg-[var(--accent-dim)] transition-all duration-150 group"
+                  className="flex items-center gap-4 p-4 border border-border rounded-xl bg-background/50 hover:border-accent/40 hover:bg-accent/[0.03] transition-all duration-300 group"
                 >
-                  <Icon
-                    size={15}
-                    className="mt-0.5 text-[var(--muted-foreground)] group-hover:text-[var(--accent)] transition-colors duration-150 shrink-0"
-                    aria-hidden="true"
-                  />
-                  <div>
-                    <span className="block font-mono text-[10px] text-[var(--muted-foreground)] uppercase tracking-wider mb-0.5">
+                  <div className="p-2 rounded-lg bg-secondary/50 group-hover:bg-accent/10 transition-colors">
+                    <Icon
+                      size={16}
+                      className="text-muted-foreground group-hover:text-accent transition-colors"
+                      aria-hidden="true"
+                    />
+                  </div>
+                  <div className="overflow-hidden">
+                    <span className="block font-mono text-[9px] text-muted-foreground uppercase tracking-widest mb-0.5">
                       {item.label}
                     </span>
-                    <span className="font-mono text-xs text-[var(--foreground)] group-hover:text-[var(--accent)] transition-colors duration-150">
+                    <span className="block font-mono text-xs text-foreground truncate group-hover:text-accent transition-colors">
                       {item.value}
                     </span>
                   </div>
@@ -75,17 +89,23 @@ export function PortfolioFooter() {
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="mt-14 pt-6 border-t border-[var(--border-subtle)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-          <span className="font-mono text-xs text-[var(--muted-foreground)]">
-            Vinícius Silva · Software Engineer
-          </span>
-          <span className="font-mono text-xs text-[var(--muted-foreground)]">
-            {new Date().getFullYear()} · Todos os direitos reservados
+        {/* Barra Inferior (Copyright) */}
+        <div className="mt-20 pt-8 border-t border-border/40 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-4">
+            <span className="font-mono text-[10px] text-muted-foreground">
+              VINÍCIUS SILVA // SOFTWARE ENGINEER
+            </span>
+            <div className="hidden sm:block h-3 w-px bg-border/60" />
+            <span className="hidden sm:block font-mono text-[10px] text-muted-foreground/60 uppercase">
+              Stack: Node.js · TypeScript · Go · Cloud
+            </span>
+          </div>
+          
+          <span className="font-mono text-[10px] text-muted-foreground/60">
+            {new Date().getFullYear()} © SYSTEM_NOMAD_PROTOCOL
           </span>
         </div>
       </div>
     </footer>
   )
 }
-
