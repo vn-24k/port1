@@ -1,10 +1,10 @@
-@import 'tailwindcss';
-@import 'tw-animate-css';
+@import "tailwindcss";
+/* Certifique-se que este pacote existe no seu node_modules */
+@import "tw-animate-css"; 
 
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Dark-first design: deep charcoal base */
   --background: oklch(0.10 0 0);
   --foreground: oklch(0.94 0 0);
   --card: oklch(0.13 0 0);
@@ -17,23 +17,28 @@
   --secondary-foreground: oklch(0.75 0 0);
   --muted: oklch(0.17 0 0);
   --muted-foreground: oklch(0.55 0 0);
+  
+  /* Accent: Azul/Violeta vibrante */
   --accent: oklch(0.62 0.19 255);
-  --accent-foreground: oklch(0.10 0 0);
-  --accent-dim: oklch(0.62 0.19 255 / 0.12);
-  --accent-border: oklch(0.62 0.19 255 / 0.30);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --accent-foreground: oklch(0.98 0 0); /* Melhorado para contraste */
+  
+  --destructive: oklch(0.55 0.22 25);
+  --destructive-foreground: oklch(0.98 0 0); /* Melhorado para contraste */
+  
   --border: oklch(0.22 0 0);
-  --border-subtle: oklch(0.18 0 0);
   --input: oklch(0.20 0 0);
-  --ring: oklch(0.62 0.19 255 / 0.40);
+  --ring: oklch(0.62 0.19 255);
+  
   --radius: 0.5rem;
   --grid-line: oklch(0.18 0 0);
 }
 
 @theme inline {
-  --font-sans: var(--font-inter), 'Inter', 'system-ui', sans-serif;
-  --font-mono: var(--font-mono), 'JetBrains Mono', monospace;
+  /* No v4, você pode usar --font-* diretamente */
+  --font-sans: 'Inter', ui-sans-serif, system-ui;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Mapeamento de cores */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -42,55 +47,47 @@
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
-  --color-input: var(--input);
   --color-ring: var(--ring);
+
   --radius-sm: calc(var(--radius) - 2px);
   --radius-md: var(--radius);
   --radius-lg: calc(var(--radius) + 4px);
 }
 
 @layer base {
-  * {
-    @apply border-border;
-    box-sizing: border-box;
+  *, ::after, ::before {
+    border-color: var(--border);
   }
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  ::selection {
-    background-color: oklch(0.62 0.19 255 / 0.25);
-    color: oklch(0.94 0 0);
   }
 }
 
-/* Grid background utility */
-.bg-grid {
-  background-image:
-    linear-gradient(var(--grid-line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-  background-size: 60px 60px;
+/* Utilitários Extras */
+@layer utilities {
+  .bg-grid {
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .noise {
+    position: relative;
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+  }
 }
-
-/* Noise texture overlay */
-.noise::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Scrollbar */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--background); }
-::-webkit-scrollbar-thumb { background: oklch(0.28 0 0); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: oklch(0.38 0 0); }
-
