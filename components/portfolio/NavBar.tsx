@@ -9,11 +9,14 @@ const navItems = [
   { label: "Contato", href: "#contact" },
 ]
 
-export function NavBar() {
+export default function NavBar() {
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 60)
+    const handleScroll = () => {
+      // Usando 20px para uma transição mais imediata ao iniciar o scroll
+      setScrolled(window.scrollY > 20)
+    }
     window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
@@ -21,22 +24,28 @@ export function NavBar() {
   return (
     <nav
       aria-label="Navegação principal"
-      className={`sticky top-0 z-50 transition-all duration-200 border-b ${
+      className={`sticky top-0 z-50 w-full transition-all duration-300 border-b ${
         scrolled
-          ? "bg-[var(--background)]/95 backdrop-blur-sm border-[var(--border)]"
-          : "bg-transparent border-transparent"
+          ? "bg-background/80 backdrop-blur-md border-border py-0"
+          : "bg-transparent border-transparent py-2"
       }`}
     >
-      <div className="max-w-6xl mx-auto px-6 h-12 flex items-center justify-between">
-        <span className="font-mono text-xs text-[var(--muted-foreground)] tracking-widest hidden sm:block">
-          VS
-        </span>
-        <ul className="flex items-center gap-1 ml-auto">
+      <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
+        {/* Logo / Monograma */}
+        <a 
+          href="#" 
+          className="font-mono text-xs font-bold tracking-tighter text-foreground hover:text-accent transition-colors"
+        >
+          <span className="text-accent">/</span>VS_
+        </a>
+
+        {/* Links de Navegação */}
+        <ul className="flex items-center gap-1">
           {navItems.map((item) => (
             <li key={item.href}>
               <a
                 href={item.href}
-                className="px-3 py-1.5 font-mono text-xs text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors duration-150 rounded hover:bg-[var(--secondary)]"
+                className="px-3 py-1.5 font-mono text-[10px] sm:text-xs text-muted-foreground uppercase tracking-wider hover:text-foreground hover:bg-secondary/50 rounded-md transition-all duration-200"
               >
                 {item.label}
               </a>
@@ -47,4 +56,3 @@ export function NavBar() {
     </nav>
   )
 }
-
